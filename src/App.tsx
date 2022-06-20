@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./components/Header";
-import Counter from "./features/counter/Counter";
+import Counter from "./redux/counter/Counter";
 
 function App(): JSX.Element {
   return (

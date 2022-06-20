@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState, AppThunk } from "../../app/store";
 import { ProductModel, ProductState } from "../../models/ProductModel";
+import { RootState } from "../store";
 import { fetchProducts } from "./productAPI";
 
 const initialState: ProductState = {

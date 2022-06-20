@@ -2,12 +2,6 @@
 import { AxiosRequestConfig, AxiosResponse } from "axios";
 import { apiBaseUrl } from "../config";
 
-interface Response<T> {
-  data: T;
-  status_code: number;
-  message: string;
-  user_id: string;
-}
 import axios from "axios";
 
 type Methods = "POST" | "GET" | "DELETE" | "PUT" | "PATCH";
@@ -39,7 +33,7 @@ interface RequestSettings<R> {
 class HttpClientService {
   private API_URL: string = apiBaseUrl;
 
-  fetch<R, T>(config: RequestSettings<R>): Promise<Response<T>> {
+  fetch<R, T>(config: RequestSettings<R>): Promise<T> {
     return new Promise((resolve, reject) => {
       axios({
         method: config.method,
@@ -49,7 +43,7 @@ class HttpClientService {
         responseType: config.responseType,
       } as AxiosRequestConfig)
         .then((response: AxiosResponse) => {
-          resolve(response.data as Response<T>);
+          resolve(response?.data as T);
         })
         .catch((e: any) => {
           try {

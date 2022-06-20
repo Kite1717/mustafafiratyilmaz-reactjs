@@ -20,9 +20,6 @@ export const productSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
-    fetchAll: (state, action: PayloadAction<Array<ProductModel>>) => {
-      state.products = action.payload;
-    },
   },
   extraReducers: (builder) => {
     builder
@@ -30,6 +27,7 @@ export const productSlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchProductsAsync.fulfilled, (state, action) => {
+        console.log("test",action)
         state.status = "idle";
         state.products = action.payload;
       });
@@ -39,6 +37,6 @@ export const productSlice = createSlice({
 export const selectProducts = (state: RootState): Array<ProductModel> =>
   state.product.products;
 
-export const { fetchAll } = productSlice.actions;
+//export const { fetchAll } = productSlice.actions;
 
 export default productSlice.reducer;

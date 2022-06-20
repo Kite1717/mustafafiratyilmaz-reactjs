@@ -8,7 +8,7 @@ export const fetchProducts = async (): Promise<Array<ProductModel>> => {
       method: "GET",
     });
 
-    return resposeData?.data;
+    return resposeData;
   } catch (err: any) {
     console.log("fetchProducts Error : ", err?.message || JSON.stringify(err));
     return [];
@@ -24,7 +24,7 @@ export const fetchProduct = async (
       method: "GET",
     });
 
-    return resposeData?.data;
+    return resposeData;
   } catch (err: any) {
     console.log("fetchProduct Error : ", err?.message || JSON.stringify(err));
     return null;

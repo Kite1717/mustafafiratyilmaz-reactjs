@@ -1,11 +1,12 @@
 import React from "react";
 import Header from "./components/Header";
-import Counter from "./redux/counter/Counter";
+import HomePage from "./pages/HomePage";
 
 function App(): JSX.Element {
   return (
     <div className="App">
-    <Header/>
+      <Header />
+      <HomePage />
     </div>
   );
 }

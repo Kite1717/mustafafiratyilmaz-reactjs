@@ -8,3 +8,8 @@ export interface ProductModel {
   description: string;
   category: string;
 }
+
+export interface ProductState {
+  products: Array<ProductModel>;
+  status: "idle" | "loading" | "failed";
+}

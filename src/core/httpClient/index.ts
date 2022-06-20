@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { AxiosResponse } from "axios";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
 import { apiBaseUrl } from "../config";
 
 interface Response<T> {
@@ -8,8 +8,7 @@ interface Response<T> {
   message: string;
   user_id: string;
 }
-
-const axios = require("axios").default;
+import axios from "axios";
 
 type Methods = "POST" | "GET" | "DELETE" | "PUT" | "PATCH";
 
@@ -48,7 +47,7 @@ class HttpClientService {
         data: config.body,
         params: config.params,
         responseType: config.responseType,
-      })
+      } as AxiosRequestConfig)
         .then((response: AxiosResponse) => {
           resolve(response.data as Response<T>);
         })

@@ -3,7 +3,7 @@ import React, { useState} from "react";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { selectProducts } from "./productSlice";
 
-export default function Counter(): JSX.Element {
+export default function Product(): JSX.Element {
   const products = useAppSelector(selectProducts);
   const dispatch = useAppDispatch();
 

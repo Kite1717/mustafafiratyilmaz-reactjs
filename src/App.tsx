@@ -1,10 +1,11 @@
 import React from "react";
+import Header from "./components/Header";
 import Counter from "./features/counter/Counter";
 
 function App(): JSX.Element {
   return (
     <div className="App">
-      <Counter />
+    <Header/>
     </div>
   );
 }

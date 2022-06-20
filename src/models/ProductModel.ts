@@ -1,4 +1,4 @@
-export interface Product {
+export interface ProductModel {
   createdAt: number;
   name: string;
   avatar: string;

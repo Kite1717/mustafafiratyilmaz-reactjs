@@ -15,7 +15,7 @@ export const fetchProducts = async (): Promise<Array<ProductModel>> => {
   }
 };
 
-export const fetchProduct = async (
+export const fetchSingleProduct = async (
   id: string
 ): Promise<ProductModel | null> => {
   try {

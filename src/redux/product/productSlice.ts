@@ -19,15 +19,13 @@ export const fetchProductsAsync = createAsyncThunk(
 export const productSlice = createSlice({
   name: "product",
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchProductsAsync.pending, (state) => {
         state.status = "loading";
       })
       .addCase(fetchProductsAsync.fulfilled, (state, action) => {
-        console.log("test",action)
         state.status = "idle";
         state.products = action.payload;
       });

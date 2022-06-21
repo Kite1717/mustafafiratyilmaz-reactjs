@@ -3,7 +3,7 @@ export interface ProductModel {
   name: string;
   avatar: string;
   developerEmail: string;
-  price: number;
+  price: number | string;
   id: string;
   description: string;
   category: string;

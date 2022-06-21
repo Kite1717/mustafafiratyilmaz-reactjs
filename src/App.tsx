@@ -4,7 +4,7 @@ import HomePage from "./pages/HomePage";
 
 function App(): JSX.Element {
   return (
-    <div className="App">
+    <div className="App mt-6 mx-6">
       <Header />
       <HomePage />
     </div>

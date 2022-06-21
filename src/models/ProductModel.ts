@@ -14,3 +14,12 @@ export interface ProductState {
   filteredProducts: Array<ProductModel>;
   status: "idle" | "loading" | "failed";
 }
+
+export interface NewProductModel {
+  name: string;
+  avatar: string;
+  developerEmail: string;
+  price: number | string;
+  description: string;
+  category: string;
+}

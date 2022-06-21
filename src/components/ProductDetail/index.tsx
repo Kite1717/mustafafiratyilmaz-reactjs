@@ -8,6 +8,9 @@ const ProductDetail = (prop: { product: ProductModel }): JSX.Element => {
       <div className="mt-6 grid grid-cols-1  gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
         <div className="shadow-md border lg:min-h-80 bg-white aspect-w-1 aspect-h-1 rounded-md overflow-hidden lg:h-80 lg:aspect-none">
           <img
+            onError={(event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+              event.currentTarget.src = "/src/assets/no-img.png";
+            }}
             src={product.avatar}
             alt={`${product.id}-${product.name}`}
             className="object-center object-contain lg:w-full lg:h-full"

@@ -9,6 +9,9 @@ const SingleProductCard = (prop: { product: ProductModel }): JSX.Element => {
       <div className="group relative">
         <div className="shadow-md border w-full min-h-80 bg-white  aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
           <img
+            onError={(event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+              event.currentTarget.src = "/src/assets/no-img.png";
+            }}
             src={product.avatar}
             alt={`${product.id}-${product.name}`}
             className="w-full h-full object-center object-contain lg:w-full lg:h-full"

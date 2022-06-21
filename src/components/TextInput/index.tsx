@@ -6,7 +6,13 @@ const TextInput = (props: {
   id: string;
   name: string;
   type?: string;
+  currentValue: string;
   onChange?: (
+    e?:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ) => void;
+  onBlur?: (
     e?:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>
@@ -20,12 +26,16 @@ const TextInput = (props: {
     type,
     id,
     name,
+    currentValue,
+    onBlur,
   } = props;
   return (
     <div className={containerClassNames.join(" ")}>
       <div className="mt-1 w-full relative rounded-md shadow-md">
         <input
+          value={currentValue}
           onChange={onChange}
+          onBlur={onBlur}
           type={type || "text"}
           name={name}
           id={id}

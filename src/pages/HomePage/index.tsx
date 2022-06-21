@@ -61,6 +61,7 @@ const HomePage = (): JSX.Element => {
               | React.ChangeEvent<HTMLInputElement>
               | React.ChangeEvent<HTMLTextAreaElement>
           ) => setSearchWord(e?.target.value || "")}
+          currentValue={searchWord}
         />
 
         <SelectInput

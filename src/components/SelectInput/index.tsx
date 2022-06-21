@@ -7,6 +7,7 @@ const TextInput = <T extends { id?: string; name?: string }>(props: {
   name: string;
   options: Array<T>;
   onChange?: (e?: React.ChangeEvent<HTMLSelectElement>) => void;
+  onBlur?: (e?: React.ChangeEvent<HTMLSelectElement>) => void;
   currentValue: string;
 }): JSX.Element => {
   const {
@@ -18,12 +19,14 @@ const TextInput = <T extends { id?: string; name?: string }>(props: {
     options,
     onChange,
     currentValue,
+    onBlur,
   } = props;
   return (
     <div className={containerClassNames.join(" ")}>
       <div className="mt-1 relative rounded-md shadow-md">
         <select
           onChange={onChange}
+          onBlur={onBlur}
           value={currentValue}
           name={name}
           id={id}

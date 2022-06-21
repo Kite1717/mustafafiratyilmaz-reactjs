@@ -1,7 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ProductModel, ProductState } from "../../models/ProductModel";
+import {
+  NewProductModel,
+  ProductModel,
+  ProductState,
+} from "../../models/ProductModel";
 import { RootState } from "../store";
-import { fetchProducts, fetchSingleProduct } from "./productAPI";
+import { createProduct, fetchProducts, fetchSingleProduct } from "./productAPI";
 
 const initialState: ProductState = {
   products: [],
@@ -21,6 +25,14 @@ export const fetchSingleProductAsync = createAsyncThunk(
   "product/fetchSingleProduct",
   async (id: string) => {
     const response: ProductModel | null = await fetchSingleProduct(id);
+    return response;
+  }
+);
+
+export const createProductAsync = createAsyncThunk(
+  "product/createProduct",
+  async (product: NewProductModel) => {
+    const response: ProductModel | null = await createProduct(product);
     return response;
   }
 );
@@ -73,7 +85,17 @@ export const productSlice = createSlice({
       .addCase(fetchSingleProductAsync.fulfilled, (state, action) => {
         state.status = "idle";
         if (action.payload) state.products = [action.payload];
+      })
+      .addCase(createProductAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(createProductAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        console.log(action.payload),"test";
+     
       });
+
+      
   },
 });
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import ProductList from "../../components/ProductList";
 
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -11,7 +11,7 @@ const HomePage = (): JSX.Element => {
   const products = useAppSelector(selectProducts);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     console.log("sdfsdf",products); 
     if(products.length === 0) {
       dispatch(fetchProductsAsync());

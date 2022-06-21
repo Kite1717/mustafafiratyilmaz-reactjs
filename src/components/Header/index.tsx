@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 
 const Header = (): JSX.Element => {
   return (
@@ -15,4 +15,4 @@ const Header = (): JSX.Element => {
     </nav>
   );
 };
-export default Header;
+export default memo(Header);

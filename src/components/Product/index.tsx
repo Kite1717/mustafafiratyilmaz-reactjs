@@ -5,11 +5,11 @@ const Product = (prop: { product: ProductModel }): JSX.Element => {
   const { product } = prop;
   return (
     <div className="group relative">
-      <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
+      <div className="w-full min-h-80 bg-gray-200 bg-opacity-50 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
         <img
           src={product.avatar}
           alt={`${product.id}-${product.name}`}
-          className="w-full h-full object-center object-cover lg:w-full lg:h-full"
+          className="w-full h-full object-center object-contain lg:w-full lg:h-full"
         />
       </div>
       <div className="mt-4 flex justify-between">

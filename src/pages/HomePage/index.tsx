@@ -26,25 +26,26 @@ const HomePage = (): JSX.Element => {
 
   useEffect(() => {
     dispatch(fetchProductsAsync());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (categories.length === 0) {
       dispatch(fecthCategoriesAsync());
     }
-  }, [categories]);
+  }, [categories, dispatch]);
 
   useEffect(() => {
-
-    const category :CategoryModel | undefined = categories.find((category:CategoryModel) => category.id === selectedCategoryId);
+    const category: CategoryModel | undefined = categories.find(
+      (category: CategoryModel) => category.id === selectedCategoryId
+    );
 
     dispatch(
       filterProducts({
         search: searchWord,
-        category: category?.name || "all"
+        category: category?.name || "all",
       })
     );
-  }, [searchWord, selectedCategoryId]);
+  }, [searchWord, selectedCategoryId, categories, dispatch]);
 
   return (
     <div>

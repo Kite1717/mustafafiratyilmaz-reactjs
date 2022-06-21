@@ -5,7 +5,7 @@ import { apiBaseUrl } from "../config";
 import axios from "axios";
 
 type Methods = "POST" | "GET" | "DELETE" | "PUT" | "PATCH";
-
+//@typescript-eslint/no-explicit-any
 axios.interceptors.response.use(
   (response: any) => response,
   (error: any) => {

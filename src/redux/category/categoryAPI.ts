@@ -3,7 +3,10 @@ import { CategoryModel } from "../../models/CategoryModel";
 
 export const fethCategories = async (): Promise<Array<CategoryModel>> => {
   try {
-    const resposeData = await httpClient.fetch<any, Array<CategoryModel>>({
+    const resposeData: Array<CategoryModel> = await httpClient.fetch<
+      any,
+      Array<CategoryModel>
+    >({
       path: "/categories/",
       method: "GET",
     });
@@ -11,6 +14,6 @@ export const fethCategories = async (): Promise<Array<CategoryModel>> => {
     return resposeData;
   } catch (err: any) {
     console.log("fetchProducts Error : ", err?.message || JSON.stringify(err));
-    return [];
+    return [] as Array<CategoryModel>;
   }
 };

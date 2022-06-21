@@ -11,5 +11,6 @@ export interface ProductModel {
 
 export interface ProductState {
   products: Array<ProductModel>;
+  filteredProducts: Array<ProductModel>;
   status: "idle" | "loading" | "failed";
 }

@@ -6,13 +6,26 @@ const TextInput = (props: {
   id: string;
   name: string;
   type?: string;
+  onChange?: (
+    e?:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ) => void;
 }): JSX.Element => {
-  const { placeholder, inputClassNames, containerClassNames, type, id, name } =
-    props;
+  const {
+    placeholder,
+    inputClassNames,
+    onChange,
+    containerClassNames,
+    type,
+    id,
+    name,
+  } = props;
   return (
     <div className={containerClassNames.join(" ")}>
       <div className="mt-1 w-full relative rounded-md shadow-sm">
         <input
+          onChange={onChange}
           type={type || "text"}
           name={name}
           id={id}

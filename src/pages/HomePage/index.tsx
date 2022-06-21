@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ProductList from "../../components/ProductList";
 import SelectInput from "../../components/SelectInput";
+import Spinner from "../../components/Spinner";
 import TextInput from "../../components/TextInput";
+import { CategoryModel } from "../../models/CategoryModel";
 import {
   fecthCategoriesAsync,
   selectCategories,
@@ -10,26 +12,39 @@ import {
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   fetchProductsAsync,
-  selectProducts,
+  filterProducts,
+  selectProductState,
 } from "../../redux/product/productSlice";
 
 const HomePage = (): JSX.Element => {
-  const products = useAppSelector(selectProducts);
+  const { filteredProducts, status } = useAppSelector(selectProductState);
   const categories = useAppSelector(selectCategories);
+  const [searchWord, setSearchWord] = useState("");
+  const [selectedCategoryId, setSelectedCategoryId] = useState("all");
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (products.length === 0) {
-      dispatch(fetchProductsAsync());
-    }
-  }, [products]);
+    dispatch(fetchProductsAsync());
+  }, []);
 
   useEffect(() => {
     if (categories.length === 0) {
       dispatch(fecthCategoriesAsync());
     }
   }, [categories]);
+
+  useEffect(() => {
+
+    const category :CategoryModel | undefined = categories.find((category:CategoryModel) => category.id === selectedCategoryId);
+
+    dispatch(
+      filterProducts({
+        search: searchWord,
+        category: category?.name || "all"
+      })
+    );
+  }, [searchWord, selectedCategoryId]);
 
   return (
     <div>
@@ -40,6 +55,11 @@ const HomePage = (): JSX.Element => {
           containerClassNames={["w-2/5"]}
           id="search"
           name="search"
+          onChange={(
+            e?:
+              | React.ChangeEvent<HTMLInputElement>
+              | React.ChangeEvent<HTMLTextAreaElement>
+          ) => setSearchWord(e?.target.value || "")}
         />
 
         <SelectInput
@@ -49,10 +69,18 @@ const HomePage = (): JSX.Element => {
           containerClassNames={[]}
           id="category"
           name="category"
+          onChange={(e?: React.ChangeEvent<HTMLSelectElement>) =>
+            setSelectedCategoryId(e?.target.value || "all")
+          }
+          currentValue={selectedCategoryId}
         />
       </div>
 
-      <ProductList products={products || []} />
+      {status === "loading" ? (
+        <Spinner />
+      ) : (
+        <ProductList products={filteredProducts || []} />
+      )}
     </div>
   );
 };

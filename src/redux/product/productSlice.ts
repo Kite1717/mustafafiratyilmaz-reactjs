@@ -5,6 +5,7 @@ import { fetchProducts } from "./productAPI";
 
 const initialState: ProductState = {
   products: [],
+  filteredProducts: [],
   status: "idle",
 };
 
@@ -19,7 +20,31 @@ export const fetchProductsAsync = createAsyncThunk(
 export const productSlice = createSlice({
   name: "product",
   initialState,
-  reducers: {},
+  reducers: {
+    filterProducts: (
+      state,
+      action: PayloadAction<{ search: string; category: string }>
+    ) => {
+      state.status = "loading";
+      if (!action.payload.search && action.payload.category === "all") {
+        state.filteredProducts = state.products;
+      }
+
+     
+      state.filteredProducts = state.products.filter(
+        (product: ProductModel) =>
+          !(
+            (action.payload.category !== "all" &&
+              product.category !== action.payload.category) ||
+            (action.payload.search &&
+              product.name
+                .toLowerCase()
+                .indexOf(action.payload?.search?.toLowerCase()) <= -1)
+          )
+      );
+      state.status = "idle";
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchProductsAsync.pending, (state) => {
@@ -27,14 +52,14 @@ export const productSlice = createSlice({
       })
       .addCase(fetchProductsAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.products = action.payload;
+        state.products = state.filteredProducts = action.payload;
       });
   },
 });
 
-export const selectProducts = (state: RootState): Array<ProductModel> =>
-  state.product.products;
+export const selectProductState = (state: RootState): ProductState =>
+  state.product;
 
-//export const { fetchAll } = productSlice.actions;
+export const { filterProducts } = productSlice.actions;
 
 export default productSlice.reducer;

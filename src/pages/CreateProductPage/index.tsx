@@ -22,7 +22,7 @@ const CreateProductPage = (): JSX.Element => {
   const categories = useAppSelector(selectCategories);
   const dispatch = useAppDispatch();
   const { createStatus } = useAppSelector(selectProductState);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (categories.length === 0) {
@@ -34,7 +34,7 @@ const CreateProductPage = (): JSX.Element => {
     if (createStatus) {
       navigate("/");
     }
-  }, [createStatus]);
+  }, [createStatus, navigate]);
 
   useEffect(() => {
     return () => {
@@ -86,7 +86,7 @@ const CreateProductPage = (): JSX.Element => {
 
           return errors;
         }}
-        onSubmit={(values, { setSubmitting, setFieldError }) => {
+        onSubmit={(values, { setSubmitting }) => {
           setSubmitting(true);
           const selectedCategory: CategoryModel | undefined = categories.find(
             (cat: CategoryModel) => cat.id === values.category

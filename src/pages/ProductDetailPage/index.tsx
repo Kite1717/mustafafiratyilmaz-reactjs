@@ -13,7 +13,7 @@ import {
 const ProductDetailPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const { products, status } = useAppSelector(selectProductState);
-  let { productId } = useParams();
+  const { productId } = useParams();
   const [product, setProduct] = useState<ProductModel | undefined>(undefined);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const ProductDetailPage = (): JSX.Element => {
       // async
       dispatch(fetchSingleProductAsync(productId || ""));
     }
-  }, [products]);
+  }, [products,dispatch,productId]);
 
   useEffect(() => {
     return () => {

@@ -11,6 +11,7 @@ const initialState: ProductState = {
   products: [],
   filteredProducts: [],
   status: "idle",
+  createStatus: false,
 };
 
 export const fetchProductsAsync = createAsyncThunk(
@@ -68,6 +69,7 @@ export const productSlice = createSlice({
       state.products = [];
       state.filteredProducts = [];
       state.status = "idle";
+      state.createStatus = false;
     },
   },
   extraReducers: (builder) => {
@@ -89,13 +91,10 @@ export const productSlice = createSlice({
       .addCase(createProductAsync.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(createProductAsync.fulfilled, (state, action) => {
+      .addCase(createProductAsync.fulfilled, (state) => {
         state.status = "idle";
-        console.log(action.payload),"test";
-     
+        state.createStatus = true;
       });
-
-      
   },
 });
 

@@ -9,19 +9,39 @@ import {
   fecthCategoriesAsync,
   selectCategories,
 } from "../../redux/category/categorySlice";
+import { useNavigate } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { createProductAsync } from "../../redux/product/productSlice";
+import {
+  createProductAsync,
+  resetProductState,
+  selectProductState,
+} from "../../redux/product/productSlice";
 
 const CreateProductPage = (): JSX.Element => {
   const categories = useAppSelector(selectCategories);
   const dispatch = useAppDispatch();
+  const { createStatus } = useAppSelector(selectProductState);
+  let navigate = useNavigate();
 
   useEffect(() => {
     if (categories.length === 0) {
       dispatch(fecthCategoriesAsync());
     }
   }, [categories, dispatch]);
+
+  useEffect(() => {
+    if (createStatus) {
+      navigate("/");
+    }
+  }, [createStatus]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetProductState());
+    };
+  }, [dispatch]);
+
   return (
     <div>
       <h2 className="mt-8 text-center font-semibold xl:text-4xl md:text-2xl">
@@ -74,12 +94,7 @@ const CreateProductPage = (): JSX.Element => {
           if (selectedCategory) {
             values.category = selectedCategory?.name;
           }
-
           dispatch(createProductAsync(values as NewProductModel));
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
         }}
       >
         {({

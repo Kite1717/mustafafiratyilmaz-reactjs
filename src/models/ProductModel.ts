@@ -13,6 +13,7 @@ export interface ProductState {
   products: Array<ProductModel>;
   filteredProducts: Array<ProductModel>;
   status: "idle" | "loading" | "failed";
+  createStatus : boolean;
 }
 
 export interface NewProductModel {

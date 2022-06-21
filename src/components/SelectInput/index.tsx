@@ -21,13 +21,13 @@ const TextInput = <T extends { id?: string; name?: string }>(props: {
   } = props;
   return (
     <div className={containerClassNames.join(" ")}>
-      <div className="mt-1 relative rounded-md shadow-sm">
+      <div className="mt-1 relative rounded-md shadow-md">
         <select
           onChange={onChange}
           value={currentValue}
           name={name}
           id={id}
-          className={`focus:ring-indigo-300 focus:border-indigo-300 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md ${inputClassNames.join(
+          className={`focus:ring-indigo-300 focus:border-indigo-300 block w-full  pr-12 sm:text-sm border-gray-300 rounded-md ${inputClassNames.join(
             " "
           )}`}
         >

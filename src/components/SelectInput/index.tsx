@@ -19,18 +19,21 @@ const TextInput = <T extends { id?: string; name?: string }>(props: {
     <div className={containerClassNames.join(" ")}>
       <div className="mt-1 relative rounded-md shadow-sm">
         <select
+        defaultValue={""}
           name={name}
           id={id}
           className={`focus:ring-indigo-300 focus:border-indigo-300 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md ${inputClassNames.join(
             " "
           )}`}
         >
-          <option value="" disabled selected hidden>
+          <option value="" disabled hidden>
             {placeholder}
           </option>
 
           {options.map((option: T) => (
-            <option value={option?.id}>{option?.name}</option>
+            <option key={`category-${option?.id}`} value={option?.id}>
+              {option?.name}
+            </option>
           ))}
         </select>
       </div>

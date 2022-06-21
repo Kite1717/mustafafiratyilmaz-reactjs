@@ -3,3 +3,7 @@ export interface CategoryModel {
   name: string;
   id: string;
 }
+export interface CategoryState {
+  categories: Array<CategoryModel>;
+  status: "idle" | "loading" | "failed";
+}

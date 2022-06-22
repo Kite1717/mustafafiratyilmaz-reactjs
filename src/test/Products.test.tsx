@@ -314,7 +314,7 @@ test("Each individual product should contain a heading", async () => {
   renderWithContext(
     <SingleProductCard product={mockProducts[0] as ProductModel} />
   );
-  for (let product of mockProducts) {
+  for (const product of mockProducts) {
     await screen.findByRole("heading", { name: product.name });
   }
 });

@@ -1,5 +1,6 @@
 import React from "react";
 import { ProductModel } from "../../models/ProductModel";
+import noImageUrl from '../../assets/no-img.png'
 
 const ProductDetail = (prop: { product: ProductModel }): JSX.Element => {
   const { product } = prop;
@@ -9,7 +10,7 @@ const ProductDetail = (prop: { product: ProductModel }): JSX.Element => {
         <div className="shadow-md border lg:min-h-80 bg-white aspect-w-1 aspect-h-1 rounded-md overflow-hidden lg:h-80 lg:aspect-none">
           <img
             onError={(event: React.SyntheticEvent<HTMLImageElement, Event>) => {
-              event.currentTarget.src = "/src/assets/no-img.png";
+              event.currentTarget.src = noImageUrl;
             }}
             src={product.avatar}
             alt={`${product.id}-${product.name}`}
